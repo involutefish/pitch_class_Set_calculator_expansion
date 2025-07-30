@@ -1,12 +1,12 @@
 
-#计算所有轮转集合
+#calculate all rotated sets 计算所有轮转集合
 def generate_rotations(pcs):
     """生成集合的所有轮转排列"""
     pcs={int(x) for x in pcs.split(",") if x.strip().isdigit()}
     pcs_sorted = sorted(pcs)  # 先对集合进行升序排序
     return [pcs_sorted[i:] + pcs_sorted[:i] for i in range(len(pcs_sorted))]
 
-#计算倒影
+#calculate inversional sets 计算倒影
 def inversion(pcs):
     pcs = {int(x) for x in pcs.split(",") if x.strip().isdigit()}
     pcs_sorted = sorted(pcs)  # 先对集合进行升序排序
@@ -17,24 +17,24 @@ def inversion(pcs):
     inversion_pcs=sorted(inversion_pcs)
     return inversion_pcs
 
-#计算最紧密集合
+#calculate compacted sets 计算最紧密集合
 def compacted_sets(pcs):
-    rotations = generate_rotations(pcs)  # 生成所有轮转排列
-    interval_set = []  # 存储所有轮转排列的宽度
-    # 计算每个轮转排列的宽度
+    rotations = generate_rotations(pcs)  # generate all rotated sets 生成所有轮转排列
+    interval_set = [] 
+    # calculate width of rotated sets轮转排列的宽度
     for ps in rotations:
         interval = (ps[-1] - ps[0]) % 12
         interval_set.append(interval)
     # 找到最小值及其索引
     min_value = min(interval_set)  # 获取最小宽度
     min_indices = [index for index, value in enumerate(interval_set) if value == min_value]  # 获取最小值的索引
-    #输出最窄集合
+    #compacted sets
     compacted_sets=[]
     for i in min_indices:
         compacted_sets.append(rotations[i])
     return compacted_sets
 
-#计算标准型
+#normal form 计算标准型
 def forte_normal_form(pcs):
     set_list = compacted_sets(pcs)  # 获取最窄集合
     if len(set_list) == 1:
@@ -51,7 +51,7 @@ def forte_normal_form(pcs):
         min_value = min(interval_diffs)  # 获取最小音程
         min_indices = [i for i, value in enumerate(interval_diffs) if value == min_value]  # 获取最小值索引
         filtered_sets = [sets[i] for i in min_indices]  # 获取符合条件的集合
-        return recursive_selection(filtered_sets, index + 1)  # 递归继续计算下一个音程
+        return recursive_selection(filtered_sets, index + 1)  
     forte_normal_form = recursive_selection(set_list, 1)  # 计算最终福特标准型
     return forte_normal_form
 
