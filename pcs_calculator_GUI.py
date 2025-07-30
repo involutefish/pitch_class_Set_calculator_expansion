@@ -238,7 +238,7 @@ def calculate():
     output_box.insert(tk.END, f"福特Prime Form: {normal_form_result}\n\n")
     output_box.insert(tk.END, f"福特Prime Form: {prime_form_result}\n\n")
     output_box.insert(tk.END, f"所有子集:\n{subsets_result}\n\n")
-    output_box.insert(tk.END, f"子集Prime From（去除空集、单音集合、二音集合）:\n{subset_class_result}\n\n")
+    output_box.insert(tk.END, f"子集Prime Form（去除空集、单音集合、二音集合）:\n{subset_class_result}\n\n")
     output_box.insert(tk.END, f"12个移位形式:\n{transpositions_result}\n\n")
     output_box.insert(tk.END, f"12个倒影形式:\n{inversions_result}\n\n")
     output_box.insert(tk.END, f"补集: {complement_result}\n\n")
